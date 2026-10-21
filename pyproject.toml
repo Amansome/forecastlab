@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forecastlab"
+version = "0.1.0"
+description = "Reproducible quarterly revenue forecasting from SEC EDGAR: baselines vs LightGBM with rolling-origin backtests."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "requests>=2.31",
+    "statsmodels>=0.14",
+    "lightgbm>=4.3",
+    "shap>=0.45",
+    "pandera[pandas]>=0.22",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+spark = ["pyspark>=3.5"]
+
+[project.scripts]
+forecastlab = "forecastlab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning"]
