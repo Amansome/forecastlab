@@ -1,0 +1,38 @@
+{
+  "ets_fallbacks": 0,
+  "origins": [
+    "2022Q2",
+    "2022Q3",
+    "2022Q4",
+    "2023Q1",
+    "2023Q2",
+    "2023Q3",
+    "2023Q4",
+    "2024Q1",
+    "2024Q2",
+    "2024Q3",
+    "2024Q4",
+    "2025Q1"
+  ],
+  "variants": {
+    "lgbm": [
+      "h",
+      "tq_1",
+      "tq_2",
+      "tq_3",
+      "tq_4",
+      "yoy_0",
+      "yoy_1",
+      "yoy_2",
+      "yoy_3",
+      "yoy_mean4",
+      "yoy_mean8",
+      "yoy_std8",
+      "yoy_accel",
+      "qoq_0",
+      "base_yoy",
+      "base_vs_trailing4",
+      "level_vs_ma4"
+    ]
+  }
+}

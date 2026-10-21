@@ -1,0 +1,154 @@
+{
+  "ticker": "WMT",
+  "entity_name": "WALMART INC.",
+  "non_usd_units": [],
+  "excluded_forms": {},
+  "tags_present": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "Revenues",
+    "SalesRevenueNet"
+  ],
+  "n_periods": 252,
+  "n_periods_multi_filing": 213,
+  "n_periods_conflicting_values": 33,
+  "tag_disagreements": [
+    {
+      "quarter": "2016Q2",
+      "Revenues": 120854000000.0,
+      "SalesRevenueNet": 119405000000.0
+    },
+    {
+      "quarter": "2017Q2",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 121949000000.0,
+      "Revenues": 123355000000.0,
+      "SalesRevenueNet": 121949000000.0
+    },
+    {
+      "quarter": "2026Q1",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 175684000000.0,
+      "Revenues": 177751000000.0
+    }
+  ],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2010Q4",
+      "from": "Revenues",
+      "to": "SalesRevenueNet",
+      "n_overlap": 41,
+      "median_diff_pct": -0.74
+    },
+    {
+      "quarter": "2011Q1",
+      "from": "SalesRevenueNet",
+      "to": "Revenues",
+      "n_overlap": 41,
+      "median_diff_pct": 0.74
+    },
+    {
+      "quarter": "2011Q4",
+      "from": "Revenues",
+      "to": "SalesRevenueNet",
+      "n_overlap": 41,
+      "median_diff_pct": -0.74
+    },
+    {
+      "quarter": "2012Q1",
+      "from": "SalesRevenueNet",
+      "to": "Revenues",
+      "n_overlap": 41,
+      "median_diff_pct": 0.74
+    }
+  ],
+  "fiscal_year_end": "Jan",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q2",
+  "n_quarters": 70,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 70,
+  "n_derived": 7,
+  "n_restated": 7,
+  "n_material_restatements": 0,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.007229014188167016,
+  "restatement_examples": [],
+  "tag_by_quarter": {
+    "Revenues": "2009Q1..2026Q2 (68)",
+    "SalesRevenueNet": "2010Q4..2011Q4 (2)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [],
+  "yoy_outliers": [],
+  "long_quarters_53wk": [],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-07-31",
+  "stale": false,
+  "verdict": "READY WITH CAVEATS",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": true,
+      "n_quarters": 66,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 73,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 18,
+      "first": "2009Q1",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    }
+  }
+}

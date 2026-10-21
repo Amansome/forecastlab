@@ -1,0 +1,148 @@
+{
+  "ticker": "PG",
+  "entity_name": "PROCTER & GAMBLE Co",
+  "non_usd_units": [],
+  "excluded_forms": {
+    "8-K": 47
+  },
+  "tags_present": [
+    "Revenues",
+    "SalesRevenueNet"
+  ],
+  "n_periods": 132,
+  "n_periods_multi_filing": 111,
+  "n_periods_conflicting_values": 30,
+  "tag_disagreements": [],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2018Q3",
+      "from": "SalesRevenueNet",
+      "to": "Revenues",
+      "n_overlap": 5,
+      "median_diff_pct": 0.0
+    }
+  ],
+  "fiscal_year_end": "Jun",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q2",
+  "n_quarters": 70,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 70,
+  "n_derived": 6,
+  "n_restated": 18,
+  "n_material_restatements": 18,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.09720084647941518,
+  "restatement_examples": [
+    {
+      "quarter": "2014Q3",
+      "first": 20792000000.0,
+      "latest": 18771000000.0,
+      "pct": -9.72
+    },
+    {
+      "quarter": "2014Q4",
+      "first": 20161000000.0,
+      "latest": 18495000000.0,
+      "pct": -8.26
+    },
+    {
+      "quarter": "2015Q2",
+      "first": 17790000000.0,
+      "latest": 16553000000.0,
+      "pct": -6.95
+    },
+    {
+      "quarter": "2015Q1",
+      "first": 18142000000.0,
+      "latest": 16930000000.0,
+      "pct": -6.68
+    },
+    {
+      "quarter": "2013Q4",
+      "first": 22280000000.0,
+      "latest": 21099000000.0,
+      "pct": -5.3
+    }
+  ],
+  "tag_by_quarter": {
+    "Revenues": "2018Q3..2026Q2 (32)",
+    "SalesRevenueNet": "2009Q1..2018Q2 (38)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [],
+  "yoy_outliers": [],
+  "long_quarters_53wk": [],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-06-30",
+  "stale": false,
+  "verdict": "READY WITH CAVEATS",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": true,
+      "n_quarters": 27,
+      "first": "2017Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 69,
+      "first": "2009Q2",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": true,
+      "n_quarters": 69,
+      "first": "2009Q2",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 66,
+      "first": "2008Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 18,
+      "first": "2008Q3",
+      "last": "2025Q3",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": true,
+      "n_quarters": 16,
+      "first": "2011Q2",
+      "last": "2026Q2",
+      "kind": "ytd/annual only"
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": true,
+      "n_quarters": 54,
+      "first": "2008Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    }
+  }
+}

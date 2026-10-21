@@ -76,9 +76,34 @@ def _value_as_of(facts: pd.DataFrame, tag, start, end, as_of) -> float | None:
     return float(m.sort_values(["filed", "accn"])["val"].iloc[-1])
 
 
+def equivalent_tag_groups(vint: pd.DataFrame, tol: float = 0.005) -> dict[str, str]:
+    """Group tags that report the same number for the same periods.
+
+    Two tags are equivalent if they overlap on >= 2 periods with a median
+    relative gap below `tol`. Only equivalent tags may be combined when a
+    quarter is derived by subtraction (e.g. annual `Revenues` minus 9M
+    `RevenueFromContract...`), so a component tag is never mixed with a total.
+    """
+    tags = sorted(vint["tag"].unique())
+    parent = {t: t for t in tags}
+
+    def find(t):
+        while parent[t] != t:
+            t = parent[t]
+        return t
+    piv = vint.pivot_table(index=["start", "end"], columns="tag", values="first_val", aggfunc="first")
+    for i, a in enumerate(tags):
+        for b in tags[i + 1:]:
+            both = piv[[a, b]].dropna()
+            if len(both) >= 2 and (both[b] / both[a] - 1).abs().median() < tol:
+                parent[find(b)] = find(a)
+    return {t: find(t) for t in tags}
+
+
 def quarter_candidates(facts: pd.DataFrame) -> pd.DataFrame:
     """All direct and derived quarterly observations, per tag."""
     vint = period_vintages(facts)
+    groups = equivalent_tag_groups(vint)
     cols = ["tag", "start", "end", "value", "available_date", "latest_value", "latest_filed",
             "source", "n_filings", "n_values"]
     direct = vint[vint["days"].apply(_is_quarter)].rename(columns={
@@ -86,8 +111,8 @@ def quarter_candidates(facts: pd.DataFrame) -> pd.DataFrame:
     direct = direct.assign(source="direct")[cols]
 
     derived_rows = []
-    cumulative = vint[vint["days"] >= config.QUARTER_DAYS[0]]
-    for (tag, start), grp in cumulative.groupby(["tag", "start"]):
+    cumulative = vint[vint["days"] >= config.QUARTER_DAYS[0]].assign(group=lambda d: d["tag"].map(groups))
+    for (_, start), grp in cumulative.groupby(["group", "start"]):
         grp = grp.sort_values("end").reset_index(drop=True)
         for i in range(len(grp)):
             for j in range(i + 1, len(grp)):
@@ -96,12 +121,18 @@ def quarter_candidates(facts: pd.DataFrame) -> pd.DataFrame:
                 if not _is_quarter(gap):
                     continue
                 # Point-in-time: use A as known when B was first filed.
-                a_val = _value_as_of(facts, tag, a["start"], a["end"], b["first_filed"])
+                a_val = _value_as_of(facts, a["tag"], a["start"], a["end"], b["first_filed"])
                 if a_val is None:
                     continue
+                # Plausibility guard against mis-tagged facts: the derived quarter
+                # must be positive and within 0.2x-5x of A's average quarter.
+                value = b["first_val"] - a_val
+                avg_q = a_val / max(1, round(a["days"] / 91))
+                if not (0.2 * avg_q <= value <= 5 * avg_q):
+                    continue
                 derived_rows.append({
-                    "tag": tag, "start": a["end"] + pd.Timedelta(days=1), "end": b["end"],
-                    "value": b["first_val"] - a_val, "available_date": b["first_filed"],
+                    "tag": b["tag"], "start": a["end"] + pd.Timedelta(days=1), "end": b["end"],
+                    "value": value, "available_date": b["first_filed"],
                     "latest_value": b["latest_val"] - a["latest_val"], "latest_filed": b["latest_filed"],
                     "source": "derived", "n_filings": int(b["n_filings"]), "n_values": int(b["n_values"]),
                 })
@@ -117,8 +148,8 @@ def quarter_candidates(facts: pd.DataFrame) -> pd.DataFrame:
 def build_quarterly(facts: pd.DataFrame, tags: list[str] | None = None) -> tuple[pd.DataFrame, dict]:
     """Select one revenue value per calendar quarter and collect diagnostics.
 
-    Preference: direct over derived, then tag priority, then period length
-    closest to 91 days, then earliest filing.
+    Value used: the first-reported one (earliest filing across tags). The
+    latest value of the highest-priority tag is kept to measure restatements.
     """
     tags = tags or config.REVENUE_TAGS
     diag: dict = {}
@@ -151,13 +182,38 @@ def build_quarterly(facts: pd.DataFrame, tags: list[str] | None = None) -> tuple
     ends = cand.groupby("quarter")["end"].nunique()
     diag["calendar_collisions"] = [str(q) for q in ends[ends > 1].index]
 
-    best = (cand.sort_values(["quarter", "src_rank", "tag_rank", "len_dev", "available_date"])
+    # Point-in-time value: the EARLIEST filing of any revenue tag for the quarter
+    # (what the market first saw). Same-day ties go to directly reported over
+    # derived (subtraction can amplify a mis-tagged fact), then tag priority.
+    # Ranking tag priority first would pick prior-year comparatives filed a
+    # year late after a tag switch.
+    best = (cand.sort_values(["quarter", "available_date", "src_rank", "tag_rank", "len_dev"])
                 .groupby("quarter", as_index=False).first())
+    # "Latest" = the preferred definition as known today, to measure restatements
+    # and definition changes (e.g. ASC 606) against the first-reported value.
+    pref = (cand.sort_values(["quarter", "tag_rank", "src_rank", "len_dev"])
+                .groupby("quarter")[["latest_value", "latest_filed", "tag"]].first())
+    best = best.drop(columns=["latest_value", "latest_filed"]).join(
+        pref.rename(columns={"tag": "latest_tag"}), on="quarter")
+    # Level-break check wherever the chosen tag changes: compare the two tags on
+    # quarters where both report (a component tag such as product-only sales
+    # would show up as a large gap).
+    by_tag = (cand.sort_values(["src_rank", "available_date"]).groupby(["quarter", "tag"])["value"].first().unstack())
+    switches = []
+    chosen = best.sort_values("quarter")[["quarter", "tag"]].to_numpy()
+    for (q0, t0), (q1, t1) in zip(chosen[:-1], chosen[1:]):
+        if t0 != t1:
+            both = by_tag[[t0, t1]].dropna() if {t0, t1} <= set(by_tag.columns) else pd.DataFrame()
+            ratio = (both[t1] / both[t0] - 1) if len(both) else pd.Series(dtype=float)
+            switches.append({"quarter": str(q1), "from": t0, "to": t1, "n_overlap": int(len(both)),
+                             "median_diff_pct": round(float(ratio.median()) * 100, 2) if len(ratio) else None})
+    diag["tag_switches"] = switches
+
     best["restatement_pct"] = np.where(best["value"] != 0, best["latest_value"] / best["value"] - 1, np.nan)
     best["restated"] = best["restatement_pct"].abs() > 0.001
     best = best[best["quarter"] >= pd.Period(config.SERIES_START, "Q")]
     best = best.sort_values("quarter").reset_index(drop=True)
-    keep = ["quarter", "start", "end", "value", "available_date", "latest_value", "latest_filed",
+    keep = ["quarter", "start", "end", "value", "available_date", "latest_value", "latest_filed", "latest_tag",
             "restatement_pct", "restated", "source", "tag", "n_filings", "n_values"]
     return best[keep], diag
 

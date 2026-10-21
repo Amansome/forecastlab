@@ -1,0 +1,166 @@
+{
+  "ticker": "GOOGL",
+  "entity_name": "Alphabet Inc.",
+  "non_usd_units": [],
+  "excluded_forms": {
+    "8-K": 3
+  },
+  "tags_present": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "Revenues"
+  ],
+  "n_periods": 103,
+  "n_periods_multi_filing": 56,
+  "n_periods_conflicting_values": 0,
+  "tag_disagreements": [],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2018Q4",
+      "from": "Revenues",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2019Q1",
+      "from": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "to": "Revenues",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2019Q2",
+      "from": "Revenues",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2020Q4",
+      "from": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "to": "Revenues",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2021Q3",
+      "from": "Revenues",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2021Q4",
+      "from": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "to": "Revenues",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2022Q1",
+      "from": "Revenues",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2025Q2",
+      "from": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "to": "Revenues",
+      "n_overlap": 22,
+      "median_diff_pct": 0.0
+    }
+  ],
+  "fiscal_year_end": "Dec",
+  "first_quarter": "2014Q3",
+  "last_quarter": "2026Q2",
+  "n_quarters": 48,
+  "missing_quarters": [],
+  "contiguous_start": "2014Q3",
+  "n_contiguous": 48,
+  "n_derived": 12,
+  "n_restated": 0,
+  "n_material_restatements": 0,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.0,
+  "restatement_examples": [],
+  "tag_by_quarter": {
+    "RevenueFromContractWithCustomerExcludingAssessedTax": "2018Q4..2025Q1 (21)",
+    "Revenues": "2014Q3..2026Q2 (27)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [],
+  "yoy_outliers": [],
+  "long_quarters_53wk": [],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-06-30",
+  "stale": false,
+  "verdict": "READY",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": true,
+      "n_quarters": 36,
+      "first": "2014Q3",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 32,
+      "first": "2015Q4",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": true,
+      "n_quarters": 45,
+      "first": "2014Q4",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": true,
+      "n_quarters": 34,
+      "first": "2017Q4",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 36,
+      "first": "2014Q3",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 24,
+      "first": "2015Q1",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": true,
+      "n_quarters": 36,
+      "first": "2014Q3",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    }
+  }
+}

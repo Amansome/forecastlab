@@ -1,0 +1,150 @@
+{
+  "ticker": "NKE",
+  "entity_name": "NIKE, Inc.",
+  "non_usd_units": [],
+  "excluded_forms": {},
+  "tags_present": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "SalesRevenueNet"
+  ],
+  "n_periods": 117,
+  "n_periods_multi_filing": 93,
+  "n_periods_conflicting_values": 12,
+  "tag_disagreements": [],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2019Q1",
+      "from": "SalesRevenueNet",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 5,
+      "median_diff_pct": 0.0
+    }
+  ],
+  "fiscal_year_end": "May",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q3",
+  "n_quarters": 71,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 71,
+  "n_derived": 18,
+  "n_restated": 5,
+  "n_material_restatements": 5,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.1292056885189039,
+  "restatement_examples": [
+    {
+      "quarter": "2011Q2",
+      "first": 5766000000.0,
+      "latest": 5021000000.0,
+      "pct": -12.92
+    },
+    {
+      "quarter": "2012Q2",
+      "first": 6470000000.0,
+      "latest": 6236000000.0,
+      "pct": -3.62
+    },
+    {
+      "quarter": "2012Q1",
+      "first": 5846000000.0,
+      "latest": 5656000000.0,
+      "pct": -3.25
+    },
+    {
+      "quarter": "2011Q4",
+      "first": 5731000000.0,
+      "latest": 5546000000.0,
+      "pct": -3.23
+    },
+    {
+      "quarter": "2012Q3",
+      "first": 6669000000.0,
+      "latest": 6474000000.0,
+      "pct": -2.92
+    }
+  ],
+  "tag_by_quarter": {
+    "RevenueFromContractWithCustomerExcludingAssessedTax": "2019Q1..2026Q3 (31)",
+    "SalesRevenueNet": "2009Q1..2018Q4 (40)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [
+    "2020Q3"
+  ],
+  "yoy_outliers": [
+    "2021Q2"
+  ],
+  "long_quarters_53wk": [],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-08-31",
+  "stale": false,
+  "verdict": "READY WITH CAVEATS",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": true,
+      "n_quarters": 9,
+      "first": "2008Q3",
+      "last": "2011Q1",
+      "kind": "quarterly"
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": true,
+      "n_quarters": 26,
+      "first": "2018Q1",
+      "last": "2026Q3",
+      "kind": "quarterly"
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 9,
+      "first": "2009Q2",
+      "last": "2011Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": true,
+      "n_quarters": 70,
+      "first": "2009Q2",
+      "last": "2026Q3",
+      "kind": "instant"
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "OperatingIncomeLoss": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 19,
+      "first": "2008Q3",
+      "last": "2026Q3",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q3",
+      "last": "2026Q3",
+      "kind": "quarterly"
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "ticker": "MSFT",
+  "entity_name": "MICROSOFT CORPORATION",
+  "non_usd_units": [],
+  "excluded_forms": {
+    "8-K": 25
+  },
+  "tags_present": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "Revenues",
+    "SalesRevenueGoodsNet",
+    "SalesRevenueNet"
+  ],
+  "n_periods": 165,
+  "n_periods_multi_filing": 111,
+  "n_periods_conflicting_values": 10,
+  "tag_disagreements": [
+    {
+      "quarter": "2015Q3",
+      "SalesRevenueGoodsNet": 15219000000.0,
+      "SalesRevenueNet": 20379000000.0
+    },
+    {
+      "quarter": "2015Q4",
+      "SalesRevenueGoodsNet": 17974000000.0,
+      "SalesRevenueNet": 23796000000.0
+    },
+    {
+      "quarter": "2016Q1",
+      "SalesRevenueGoodsNet": 14321000000.0,
+      "SalesRevenueNet": 20531000000.0
+    },
+    {
+      "quarter": "2016Q3",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 21928000000.0,
+      "SalesRevenueGoodsNet": 13493000000.0,
+      "SalesRevenueNet": 20453000000.0
+    },
+    {
+      "quarter": "2016Q4",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 25826000000.0,
+      "SalesRevenueGoodsNet": 16537000000.0,
+      "SalesRevenueNet": 24090000000.0
+    },
+    {
+      "quarter": "2017Q1",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 23212000000.0,
+      "SalesRevenueGoodsNet": 13391000000.0,
+      "SalesRevenueNet": 22090000000.0
+    },
+    {
+      "quarter": "2017Q2",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 25605000000.0,
+      "SalesRevenueNet": 23317000000.0
+    },
+    {
+      "quarter": "2017Q3",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 24538000000.0,
+      "SalesRevenueGoodsNet": 14298000000.0,
+      "SalesRevenueNet": 24538000000.0
+    },
+    {
+      "quarter": "2017Q4",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 28918000000.0,
+      "SalesRevenueGoodsNet": 17926000000.0,
+      "SalesRevenueNet": 28918000000.0
+    },
+    {
+      "quarter": "2018Q1",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 26819000000.0,
+      "SalesRevenueGoodsNet": 15114000000.0,
+      "SalesRevenueNet": 26819000000.0
+    }
+  ],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2011Q1",
+      "from": "Revenues",
+      "to": "SalesRevenueNet",
+      "n_overlap": 7,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2018Q2",
+      "from": "SalesRevenueNet",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 7,
+      "median_diff_pct": 5.08
+    }
+  ],
+  "fiscal_year_end": "Jun",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q2",
+  "n_quarters": 70,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 70,
+  "n_derived": 6,
+  "n_restated": 4,
+  "n_material_restatements": 4,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.09812583093880001,
+  "restatement_examples": [
+    {
+      "quarter": "2017Q2",
+      "first": 23317000000.0,
+      "latest": 25605000000.0,
+      "pct": 9.81
+    },
+    {
+      "quarter": "2016Q3",
+      "first": 20453000000.0,
+      "latest": 21928000000.0,
+      "pct": 7.21
+    },
+    {
+      "quarter": "2016Q4",
+      "first": 24090000000.0,
+      "latest": 25826000000.0,
+      "pct": 7.21
+    },
+    {
+      "quarter": "2017Q1",
+      "first": 22090000000.0,
+      "latest": 23212000000.0,
+      "pct": 5.08
+    }
+  ],
+  "tag_by_quarter": {
+    "RevenueFromContractWithCustomerExcludingAssessedTax": "2018Q2..2026Q2 (33)",
+    "Revenues": "2009Q1..2010Q4 (8)",
+    "SalesRevenueNet": "2011Q1..2018Q1 (29)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [],
+  "yoy_outliers": [],
+  "long_quarters_53wk": [],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-06-30",
+  "stale": false,
+  "verdict": "READY WITH CAVEATS",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": true,
+      "n_quarters": 30,
+      "first": "2008Q3",
+      "last": "2018Q1",
+      "kind": "quarterly"
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": true,
+      "n_quarters": 27,
+      "first": "2017Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 69,
+      "first": "2009Q2",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": true,
+      "n_quarters": 69,
+      "first": "2009Q2",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": true,
+      "n_quarters": 34,
+      "first": "2017Q2",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 60,
+      "first": "2008Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 54,
+      "first": "2008Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": true,
+      "n_quarters": 54,
+      "first": "2008Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    }
+  }
+}

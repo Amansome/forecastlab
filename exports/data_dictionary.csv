@@ -1,0 +1,6 @@
+column,type,description,allowed_values,example
+Version,text,Anaplan version. 'Actual' = first-reported SEC revenue; 'Fcst_<model>' = forecast from that model.,Actual; Fcst_LightGBM; Fcst_LightGBM_Macro; Fcst_ETS; Fcst_SeasonalNaive,Fcst_LightGBM
+Time Period,text,Quarter on the model calendar (calendar year). Fiscal quarters are mapped to the nearest calendar quarter end.,^Q[1-4] FY\d{2}$,Q3 FY26
+Line Item,text,Anaplan line item.,Revenue,Revenue
+Entity,text,Company ticker (list dimension).,AAPL; MSFT; GOOGL; AMZN; WMT; TGT; HD; KO; PG; NKE,AAPL
+Value,number,"Quarterly revenue in USD millions, 3 decimals. Must be finite and > 0.",> 0,94930.000

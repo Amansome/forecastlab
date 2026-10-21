@@ -62,18 +62,27 @@ def test_derived_quarter_is_point_in_time():
     assert q["value"] == 170 and q["latest_value"] == 200
 
 
-def test_tag_priority_and_fallback():
+def test_tag_choice_is_point_in_time():
     cf = {"facts": {"us-gaap": {
         "SalesRevenueNet": {"units": {"USD": [fact("2016-01-01", "2016-03-31", 50, "2016-05-01"),
                                               fact("2016-04-01", "2016-06-30", 55, "2016-08-01")]}},
-        "Revenues": {"units": {"USD": [fact("2016-04-01", "2016-06-30", 56, "2017-08-01")]}},
+        # new tag: Q2 2016 only appears a year later as a comparative, with a different value
+        "Revenues": {"units": {"USD": [fact("2016-04-01", "2016-06-30", 56, "2017-08-01"),
+                                       fact("2016-07-01", "2016-09-30", 60, "2016-11-01")]}},
     }}}
+    cf["facts"]["us-gaap"]["SalesRevenueNet"]["units"]["USD"].append(fact("2016-07-01", "2016-09-30", 59, "2016-11-01"))
     tags = ["Revenues", "SalesRevenueNet"]
     s, diag = edgar.build_quarterly(edgar.facts_to_frame(cf, tags), tags)
     got = s.set_index(s["quarter"].astype(str))
     assert got.loc["2016Q1", "tag"] == "SalesRevenueNet"    # fallback fills history
-    assert got.loc["2016Q2", "tag"] == "Revenues"           # priority tag wins when present
-    assert len(diag["tag_disagreements"]) == 1              # 55 vs 56 differ by > 1%
+    # Q2: the value first filed (old tag, 2016-08-01) is used, not the later comparative
+    assert got.loc["2016Q2", "value"] == 55 and got.loc["2016Q2", "tag"] == "SalesRevenueNet"
+    assert got.loc["2016Q2", "latest_value"] == 56 and got.loc["2016Q2", "latest_tag"] == "Revenues"
+    assert bool(got.loc["2016Q2", "restated"])
+    # Q3: both tags filed the same day -> tag priority breaks the tie
+    assert got.loc["2016Q3", "value"] == 60 and got.loc["2016Q3", "tag"] == "Revenues"
+    assert len(diag["tag_disagreements"]) == 2              # 55 vs 56 and 59 vs 60 differ by > 1%
+    assert diag["tag_switches"][0]["quarter"] == "2016Q3"
 
 
 def test_calendar_quarter_mapping():
@@ -103,3 +112,18 @@ def test_readiness_report_runs_and_flags_short_history():
     md = quality.readiness_markdown(company, q)
     for section in ("## Revenue series", "## Candidate drivers", "## Material gaps", "first-reported"):
         assert section in md
+
+
+def test_mis_tagged_fact_cannot_create_a_negative_quarter():
+    """A bogus annual value under an equivalent tag must not yield a negative derived Q4."""
+    usd_sales = [fact("2013-07-01", "2013-09-30", 20, "2013-10-25"), fact("2013-10-01", "2013-12-31", 21, "2014-01-25"),
+                 fact("2013-07-01", "2014-03-31", 62, "2014-04-23"), fact("2014-01-01", "2014-03-31", 21, "2014-04-23"),
+                 fact("2013-07-01", "2014-06-30", 83, "2014-08-08", form="10-K", fp="FY")]
+    usd_rev = [fact("2013-07-01", "2013-09-30", 20, "2013-10-25"), fact("2013-10-01", "2013-12-31", 21, "2014-01-25"),
+               fact("2013-07-01", "2014-06-30", 29, "2014-08-08", form="10-K", fp="FY")]   # mis-tagged subtotal
+    cf = {"facts": {"us-gaap": {"Revenues": {"units": {"USD": usd_rev}}, "SalesRevenueNet": {"units": {"USD": usd_sales}}}}}
+    tags = ["Revenues", "SalesRevenueNet"]
+    s, _ = edgar.build_quarterly(edgar.facts_to_frame(cf, tags), tags)
+    q4 = s.set_index(s["quarter"].astype(str)).loc["2014Q2"]
+    assert q4["value"] == 21 and q4["tag"] == "SalesRevenueNet"
+    assert (s["value"] > 0).all()

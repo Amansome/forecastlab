@@ -50,14 +50,20 @@ COMPANIES: list[Company] = [
 TICKERS = [c.ticker for c in COMPANIES]
 
 # Revenue tags in priority order. The first two are the tags named in the
-# project brief. SalesRevenueNet is a documented fallback: it was the common
-# pre-ASC 606 (pre-2018) tag, and without it most companies lose ~9 years of
-# history. Which tag supplied each quarter is recorded and reported.
+# project brief. SalesRevenueNet and SalesRevenueGoodsNet are documented
+# fallbacks: they were common pre-ASC 606 (pre-2018) tags, and without them
+# most companies lose ~9 years of history (Coca-Cola used
+# SalesRevenueGoodsNet). Which tag supplied each quarter is recorded and
+# disagreements between tags are reported.
 REVENUE_TAGS = [
     "Revenues",
     "RevenueFromContractWithCustomerExcludingAssessedTax",
     "SalesRevenueNet",
+    "SalesRevenueGoodsNet",
 ]
+# A company is flagged stale if its latest quarter ended more than this many
+# days before the download (10-Qs are due within 40-45 days of quarter end).
+STALE_AFTER_DAYS = 120
 ALLOWED_FORMS = {"10-Q", "10-K", "10-Q/A", "10-K/A", "10-KT", "10-QT"}
 
 # A fiscal quarter is 13 weeks (91 days) or 14 weeks in a 53-week year.

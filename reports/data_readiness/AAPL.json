@@ -1,0 +1,155 @@
+{
+  "ticker": "AAPL",
+  "entity_name": "Apple Inc.",
+  "non_usd_units": [],
+  "excluded_forms": {
+    "8-K": 22
+  },
+  "tags_present": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "Revenues",
+    "SalesRevenueNet"
+  ],
+  "n_periods": 140,
+  "n_periods_multi_filing": 107,
+  "n_periods_conflicting_values": 5,
+  "tag_disagreements": [],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2018Q3",
+      "from": "SalesRevenueNet",
+      "to": "Revenues",
+      "n_overlap": 8,
+      "median_diff_pct": 0.0
+    },
+    {
+      "quarter": "2018Q4",
+      "from": "Revenues",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 5,
+      "median_diff_pct": 0.0
+    }
+  ],
+  "fiscal_year_end": "Sep",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q2",
+  "n_quarters": 70,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 70,
+  "n_derived": 6,
+  "n_restated": 2,
+  "n_material_restatements": 2,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.23677811550151984,
+  "restatement_examples": [
+    {
+      "quarter": "2009Q3",
+      "first": 9870000000.0,
+      "latest": 12207000000.0,
+      "pct": 23.68
+    },
+    {
+      "quarter": "2009Q2",
+      "first": 8337000000.0,
+      "latest": 9734000000.0,
+      "pct": 16.76
+    }
+  ],
+  "tag_by_quarter": {
+    "RevenueFromContractWithCustomerExcludingAssessedTax": "2018Q4..2026Q2 (31)",
+    "Revenues": "2018Q3..2018Q3 (1)",
+    "SalesRevenueNet": "2009Q1..2018Q2 (38)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [
+    "2014Q4",
+    "2016Q4",
+    "2017Q4",
+    "2020Q4"
+  ],
+  "yoy_outliers": [
+    "2010Q2",
+    "2010Q3",
+    "2010Q4",
+    "2011Q1",
+    "2011Q2",
+    "2011Q4"
+  ],
+  "long_quarters_53wk": [
+    "2011Q4",
+    "2016Q4",
+    "2022Q4"
+  ],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-06-27",
+  "stale": false,
+  "verdict": "READY",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 70,
+      "first": "2008Q3",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": true,
+      "n_quarters": 70,
+      "first": "2008Q3",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": true,
+      "n_quarters": 32,
+      "first": "2018Q3",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 13,
+      "first": "2013Q4",
+      "last": "2025Q4",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    }
+  }
+}

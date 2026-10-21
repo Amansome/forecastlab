@@ -1,0 +1,154 @@
+{
+  "ticker": "KO",
+  "entity_name": "COCA COLA CO",
+  "non_usd_units": [],
+  "excluded_forms": {
+    "8-K": 12
+  },
+  "tags_present": [
+    "Revenues",
+    "SalesRevenueGoodsNet"
+  ],
+  "n_periods": 118,
+  "n_periods_multi_filing": 90,
+  "n_periods_conflicting_values": 5,
+  "tag_disagreements": [
+    {
+      "quarter": "2018Q2",
+      "Revenues": 9421000000.0,
+      "SalesRevenueGoodsNet": 8927000000.0
+    }
+  ],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2018Q3",
+      "from": "SalesRevenueGoodsNet",
+      "to": "Revenues",
+      "n_overlap": 5,
+      "median_diff_pct": 0.0
+    }
+  ],
+  "fiscal_year_end": "Dec",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q1",
+  "n_quarters": 69,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 69,
+  "n_derived": 17,
+  "n_restated": 5,
+  "n_material_restatements": 5,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.10676251331203401,
+  "restatement_examples": [
+    {
+      "quarter": "2017Q4",
+      "first": 7512000000.0,
+      "latest": 8314000000.0,
+      "pct": 10.68
+    },
+    {
+      "quarter": "2018Q4",
+      "first": 7058000000.0,
+      "latest": 7806000000.0,
+      "pct": 10.6
+    },
+    {
+      "quarter": "2019Q1",
+      "first": 8020000000.0,
+      "latest": 8694000000.0,
+      "pct": 8.4
+    },
+    {
+      "quarter": "2018Q3",
+      "first": 8245000000.0,
+      "latest": 8775000000.0,
+      "pct": 6.43
+    },
+    {
+      "quarter": "2018Q2",
+      "first": 8927000000.0,
+      "latest": 9421000000.0,
+      "pct": 5.53
+    }
+  ],
+  "tag_by_quarter": {
+    "Revenues": "2018Q3..2026Q1 (31)",
+    "SalesRevenueGoodsNet": "2009Q1..2018Q2 (38)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [],
+  "yoy_outliers": [],
+  "long_quarters_53wk": [],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-04-03",
+  "stale": true,
+  "verdict": "READY WITH CAVEATS",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": true,
+      "n_quarters": 26,
+      "first": "2017Q3",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 69,
+      "first": "2008Q4",
+      "last": "2026Q1",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": true,
+      "n_quarters": 69,
+      "first": "2008Q4",
+      "last": "2026Q1",
+      "kind": "instant"
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 54,
+      "first": "2008Q2",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 18,
+      "first": "2009Q1",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": true,
+      "n_quarters": 54,
+      "first": "2008Q2",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    }
+  }
+}

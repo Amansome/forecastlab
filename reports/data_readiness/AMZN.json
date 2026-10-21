@@ -1,0 +1,275 @@
+{
+  "ticker": "AMZN",
+  "entity_name": "AMAZON COM INC",
+  "non_usd_units": [],
+  "excluded_forms": {},
+  "tags_present": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "SalesRevenueGoodsNet",
+    "SalesRevenueNet"
+  ],
+  "n_periods": 180,
+  "n_periods_multi_filing": 143,
+  "n_periods_conflicting_values": 8,
+  "tag_disagreements": [
+    {
+      "quarter": "2011Q1",
+      "SalesRevenueGoodsNet": 8698000000.0,
+      "SalesRevenueNet": 9857000000.0
+    },
+    {
+      "quarter": "2011Q2",
+      "SalesRevenueGoodsNet": 8611000000.0,
+      "SalesRevenueNet": 9913000000.0
+    },
+    {
+      "quarter": "2011Q3",
+      "SalesRevenueGoodsNet": 9382000000.0,
+      "SalesRevenueNet": 10876000000.0
+    },
+    {
+      "quarter": "2012Q1",
+      "SalesRevenueGoodsNet": 11249000000.0,
+      "SalesRevenueNet": 13185000000.0
+    },
+    {
+      "quarter": "2012Q2",
+      "SalesRevenueGoodsNet": 10791000000.0,
+      "SalesRevenueNet": 12834000000.0
+    },
+    {
+      "quarter": "2012Q3",
+      "SalesRevenueGoodsNet": 11546000000.0,
+      "SalesRevenueNet": 13806000000.0
+    },
+    {
+      "quarter": "2013Q1",
+      "SalesRevenueGoodsNet": 13271000000.0,
+      "SalesRevenueNet": 16070000000.0
+    },
+    {
+      "quarter": "2013Q2",
+      "SalesRevenueGoodsNet": 12752000000.0,
+      "SalesRevenueNet": 15704000000.0
+    },
+    {
+      "quarter": "2013Q3",
+      "SalesRevenueGoodsNet": 13808000000.0,
+      "SalesRevenueNet": 17092000000.0
+    },
+    {
+      "quarter": "2014Q1",
+      "SalesRevenueGoodsNet": 15705000000.0,
+      "SalesRevenueNet": 19741000000.0
+    },
+    {
+      "quarter": "2014Q2",
+      "SalesRevenueGoodsNet": 15251000000.0,
+      "SalesRevenueNet": 19340000000.0
+    },
+    {
+      "quarter": "2014Q3",
+      "SalesRevenueGoodsNet": 16022000000.0,
+      "SalesRevenueNet": 20579000000.0
+    },
+    {
+      "quarter": "2015Q1",
+      "SalesRevenueGoodsNet": 17084000000.0,
+      "SalesRevenueNet": 22717000000.0
+    },
+    {
+      "quarter": "2015Q2",
+      "SalesRevenueGoodsNet": 17104000000.0,
+      "SalesRevenueNet": 23185000000.0
+    },
+    {
+      "quarter": "2015Q3",
+      "SalesRevenueGoodsNet": 18463000000.0,
+      "SalesRevenueNet": 25358000000.0
+    },
+    {
+      "quarter": "2016Q1",
+      "SalesRevenueGoodsNet": 20581000000.0,
+      "SalesRevenueNet": 29128000000.0
+    },
+    {
+      "quarter": "2016Q2",
+      "SalesRevenueGoodsNet": 21116000000.0,
+      "SalesRevenueNet": 30404000000.0
+    },
+    {
+      "quarter": "2016Q3",
+      "SalesRevenueGoodsNet": 22339000000.0,
+      "SalesRevenueNet": 32714000000.0
+    },
+    {
+      "quarter": "2017Q1",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 35714000000.0,
+      "SalesRevenueGoodsNet": 23734000000.0,
+      "SalesRevenueNet": 35714000000.0
+    },
+    {
+      "quarter": "2017Q2",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 37955000000.0,
+      "SalesRevenueGoodsNet": 24745000000.0,
+      "SalesRevenueNet": 37955000000.0
+    },
+    {
+      "quarter": "2017Q3",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 43744000000.0,
+      "SalesRevenueGoodsNet": 28768000000.0,
+      "SalesRevenueNet": 43744000000.0
+    },
+    {
+      "quarter": "2018Q1",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 51042000000.0,
+      "SalesRevenueGoodsNet": 31605000000.0,
+      "SalesRevenueNet": 51042000000.0
+    },
+    {
+      "quarter": "2018Q2",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 52886000000.0,
+      "SalesRevenueGoodsNet": 31864000000.0,
+      "SalesRevenueNet": 52886000000.0
+    }
+  ],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2018Q3",
+      "from": "SalesRevenueNet",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 7,
+      "median_diff_pct": 0.0
+    }
+  ],
+  "fiscal_year_end": "Dec",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q2",
+  "n_quarters": 70,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 70,
+  "n_derived": 6,
+  "n_restated": 5,
+  "n_material_restatements": 5,
+  "probable_misdated_facts": [
+    "2011Q1",
+    "2011Q2",
+    "2011Q3"
+  ],
+  "max_abs_restatement_pct": 0.33762808156639945,
+  "restatement_examples": [
+    {
+      "quarter": "2011Q1",
+      "first": 9857000000.0,
+      "latest": 13185000000.0,
+      "pct": 33.76
+    },
+    {
+      "quarter": "2011Q2",
+      "first": 9913000000.0,
+      "latest": 12834000000.0,
+      "pct": 29.47
+    },
+    {
+      "quarter": "2011Q3",
+      "first": 10876000000.0,
+      "latest": 13806000000.0,
+      "pct": 26.94
+    },
+    {
+      "quarter": "2011Q4",
+      "first": 17431000000.0,
+      "latest": 21268000000.0,
+      "pct": 22.01
+    },
+    {
+      "quarter": "2012Q4",
+      "first": 17431000000.0,
+      "latest": 21268000000.0,
+      "pct": 22.01
+    }
+  ],
+  "tag_by_quarter": {
+    "RevenueFromContractWithCustomerExcludingAssessedTax": "2018Q3..2026Q2 (32)",
+    "SalesRevenueNet": "2009Q1..2018Q2 (38)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [
+    "2009Q4",
+    "2010Q4"
+  ],
+  "yoy_outliers": [],
+  "long_quarters_53wk": [],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-06-30",
+  "stale": false,
+  "verdict": "READY WITH CAVEATS",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": true,
+      "n_quarters": 55,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 70,
+      "first": "2008Q4",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": true,
+      "n_quarters": 70,
+      "first": "2008Q4",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": true,
+      "n_quarters": 33,
+      "first": "2017Q4",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 64,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 27,
+      "first": "2008Q2",
+      "last": "2017Q1",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    }
+  }
+}

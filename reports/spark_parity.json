@@ -1,0 +1,31 @@
+{
+  "spark_mode": "local[*] (not Databricks)",
+  "n_feature_rows_spark": 2272,
+  "n_feature_rows_pandas": 2272,
+  "max_abs_feature_diff": 7.105427357601002e-15,
+  "feature_diff_by_column": {
+    "base_vs_trailing4": 3.552713678800501e-15,
+    "base_yoy": 3.552713678800501e-15,
+    "level_vs_ma4": 3.552713678800501e-15,
+    "qoq_0": 3.552713678800501e-15,
+    "tq_1": 0.0,
+    "tq_2": 0.0,
+    "tq_3": 0.0,
+    "tq_4": 0.0,
+    "yoy_0": 3.552713678800501e-15,
+    "yoy_1": 3.552713678800501e-15,
+    "yoy_2": 3.552713678800501e-15,
+    "yoy_3": 3.552713678800501e-15,
+    "yoy_accel": 7.105427357601002e-15,
+    "yoy_mean4": 8.881784197001252e-16,
+    "yoy_mean8": 4.440892098500626e-16,
+    "yoy_std8": 1.4710455076283324e-15,
+    "base": 1.887379141862766e-15,
+    "target": 3.552713678800501e-15
+  },
+  "train_rows_with_future_label": 0,
+  "n_forecasts_compared": 480,
+  "n_forecasts_pandas": 480,
+  "max_rel_forecast_diff": 1.9984014443252818e-15,
+  "mean_rel_forecast_diff": 8.877158267731981e-16
+}

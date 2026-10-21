@@ -26,6 +26,13 @@ def _fiscal_year_end(facts: pd.DataFrame) -> str:
     return annual["end"].dt.strftime("%b").mode().iloc[0]
 
 
+def _download_date(cik: int) -> pd.Timestamp | None:
+    meta = config.EDGAR_CACHE / f"CIK{cik:010d}.json.meta.json"
+    if not meta.exists():
+        return None
+    return pd.Timestamp(json.loads(meta.read_text())["downloaded_utc"][:10])
+
+
 def analyse_company(company: config.Company, companyfacts: dict) -> tuple[pd.DataFrame, dict]:
     facts = edgar.facts_to_frame(companyfacts, config.REVENUE_TAGS)
     series, diag = edgar.build_quarterly(facts)
@@ -42,6 +49,12 @@ def analyse_company(company: config.Company, companyfacts: dict) -> tuple[pd.Dat
     qoq = pd.Series({p: logv[p] - logv.get(p - 1, np.nan) for p in logv.index})
     yoy = pd.Series({p: logv[p] - logv.get(p - 4, np.nan) for p in logv.index})
     restated = series[series["restated"]]
+    # A "restatement" whose latest value equals the first-reported value of the
+    # same quarter one year later is almost certainly a mis-dated XBRL fact.
+    first_by_q = series.set_index("quarter")["value"]
+    misdated = [str(r.quarter) for r in series.itertuples()
+                if abs(r.restatement_pct) > 0.01 and r.quarter + 4 in first_by_q.index
+                and abs(r.latest_value / first_by_q[r.quarter + 4] - 1) < 0.001]
     material = series[series["restatement_pct"].abs() > 0.01]
 
     q.update({
@@ -52,6 +65,7 @@ def analyse_company(company: config.Company, companyfacts: dict) -> tuple[pd.Dat
         "contiguous_start": str(tail["quarter"].min()), "n_contiguous": int(len(tail)),
         "n_derived": int((series["source"] == "derived").sum()),
         "n_restated": int(len(restated)), "n_material_restatements": int(len(material)),
+        "probable_misdated_facts": misdated,
         "max_abs_restatement_pct": float(series["restatement_pct"].abs().max()),
         "restatement_examples": [
             {"quarter": str(r.quarter), "first": float(r.value), "latest": float(r.latest_value),
@@ -64,12 +78,18 @@ def analyse_company(company: config.Company, companyfacts: dict) -> tuple[pd.Dat
         "yoy_outliers": [str(p) for p, v in yoy.items() if abs(v) > 0.5],
         "long_quarters_53wk": [str(r.quarter) for r in series.itertuples() if (r.end - r.start).days >= 97],
     })
+    downloaded = _download_date(company.cik)
+    last_end = series["end"].max()
+    q["downloaded"] = str(downloaded.date()) if downloaded is not None else None
+    q["latest_period_end"] = str(last_end.date())
+    q["stale"] = bool(downloaded is not None and (downloaded - last_end).days > config.STALE_AFTER_DAYS)
     issues = 0
     issues += len(q["missing_quarters"]) > 0
     issues += q["n_material_restatements"] > 2
     issues += len(q["calendar_collisions"]) > 0
     issues += len(q["tag_disagreements"]) > 0
     issues += len(q["non_positive_values"]) > 0
+    issues += q["stale"]
     min_needed = config.MIN_TRAIN_QUARTERS + config.N_FOLDS + max(config.HORIZONS) + 8
     if q["n_contiguous"] < min_needed or q["non_positive_values"]:
         q["verdict"] = "NOT READY"
@@ -92,12 +112,14 @@ def readiness_markdown(company: config.Company, q: dict) -> str:
           f"| Quarters found | {q['n_quarters']} ({q['first_quarter']} to {q['last_quarter']}) |",
           f"| Contiguous run used for modelling | {q['n_contiguous']} quarters from {q['contiguous_start']} (need >= {q['min_contiguous_needed']}) |",
           f"| Missing quarters | {', '.join(q['missing_quarters']) or 'none'} |",
+          f"| Latest period end / downloaded | {q['latest_period_end']} / {q['downloaded']}{' - **STALE**: newer filings are missing from companyfacts' if q['stale'] else ''} |",
           f"| Q4 / quarters derived from YTD or annual minus 9M | {q['n_derived']} |",
           f"| Tags used | {'; '.join(f'{k}: {v}' for k, v in q['tag_by_quarter'].items())} |",
           f"| Non-USD units on revenue tags | {', '.join(q['non_usd_units']) or 'none'} |",
           f"| Periods reported in >1 filing (duplicates) | {q['n_periods_multi_filing']} of {q['n_periods']} |",
           f"| Periods whose value changed between filings | {q['n_periods_conflicting_values']} |",
           f"| Quarters restated >0.1% / >1% | {q['n_restated']} / {q['n_material_restatements']} (max {q['max_abs_restatement_pct']*100:.1f}%) |",
+          f"| Restatements that equal the next year's quarter (probable mis-dated XBRL facts) | {', '.join(q['probable_misdated_facts']) or 'none'} |",
           f"| Tag disagreements (>1%) | {len(q['tag_disagreements'])} |",
           f"| Calendar-mapping collisions | {', '.join(q['calendar_collisions']) or 'none'} |",
           f"| 14-week (53-week-year) quarters | {', '.join(q['long_quarters_53wk']) or 'none'} |",
@@ -108,8 +130,18 @@ def readiness_markdown(company: config.Company, q: dict) -> str:
         L += ["Largest restatements (first-reported vs latest-reported, USD):", ""]
         L += [f"- {r['quarter']}: {r['first']:,.0f} -> {r['latest']:,.0f} ({r['pct']:+.2f}%)" for r in q["restatement_examples"]]
         L += ["", "The model uses **first-reported** values (what was known at forecast time); restatements are reported, not silently absorbed.", ""]
+    if q.get("tag_switches"):
+        L += ["Tag switches in the chosen series (overlap = quarters both tags report; a large median gap "
+              "means a definitional break, e.g. an ASC 606 restatement or a component tag):", "",
+              "| From quarter | From tag | To tag | Overlap quarters | Median gap % |", "|---|---|---|---|---|"]
+        gap = lambda v: "n/a" if v is None else f"{v:+.2f}"  # noqa: E731
+        L += [f"| {w['quarter']} | {w['from']} | {w['to']} | {w['n_overlap']} | {gap(w['median_diff_pct'])} |"
+              for w in q["tag_switches"]]
+        L += [""]
     if q["tag_disagreements"]:
-        L += ["Tag disagreements (first 5):", ""] + [f"- {d}" for d in q["tag_disagreements"][:5]] + [""]
+        L += ["Tag disagreements, any two tags >1% apart in the same quarter (first 5). Lower-priority tags are often "
+              "components (e.g. product-only sales), so a disagreement is a flag to read, not an error:", ""]
+        L += [f"- {d}" for d in q["tag_disagreements"][:5]] + [""]
     L += ["## Candidate drivers in companyfacts", "",
           "| Concept | Present | Quarters covered | Range | Kind |", "|---|---|---|---|---|"]
     for k, v in q["drivers"].items():
@@ -161,7 +193,7 @@ def run_quality(with_macro: bool = True) -> pd.DataFrame:
             panels.append(series.assign(ticker=c.ticker))
         summary.append({k: q.get(k) for k in ["ticker", "verdict", "first_quarter", "last_quarter", "n_quarters",
                                                "n_contiguous", "contiguous_start", "n_derived", "n_restated",
-                                               "n_material_restatements", "fiscal_year_end"]}
+                                               "n_material_restatements", "fiscal_year_end", "stale"]}
                        | {"missing_quarters": len(q.get("missing_quarters", [])),
                           "tag_disagreements": len(q.get("tag_disagreements", [])),
                           "calendar_collisions": len(q.get("calendar_collisions", []))})
@@ -171,10 +203,17 @@ def run_quality(with_macro: bool = True) -> pd.DataFrame:
                                   "start": "period_start", "end": "period_end"})
     panel["quarter"] = panel["quarter"].astype(str)
     cols = ["ticker", "quarter", "period_start", "period_end", "revenue", "available_date", "latest_revenue",
-            "latest_filed", "restatement_pct", "source", "tag", "n_filings"]
+            "latest_filed", "latest_tag", "restatement_pct", "source", "tag", "n_filings"]
     panel[cols].to_csv(config.DATA_PROCESSED / "quarterly_revenue.csv", index=False)
     summ = pd.DataFrame(summary)
     summ.to_csv(config.DATA_PROCESSED / "quality_summary.csv", index=False)
+    macro_path = config.DATA_PROCESSED / "macro_quarterly.csv"
     if with_macro:
-        macro_quarterly().to_csv(config.DATA_PROCESSED / "macro_quarterly.csv", index=False)
+        try:
+            macro_quarterly().to_csv(macro_path, index=False)
+        except RuntimeError as exc:
+            print(f"[quality] WARNING: macro data unavailable, LightGBM + macro will be skipped ({exc})")
+            macro_path.unlink(missing_ok=True)
+    else:
+        macro_path.unlink(missing_ok=True)
     return summ

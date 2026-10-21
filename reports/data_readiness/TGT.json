@@ -1,0 +1,262 @@
+{
+  "ticker": "TGT",
+  "entity_name": "Target Corporation",
+  "non_usd_units": [],
+  "excluded_forms": {},
+  "tags_present": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "Revenues",
+    "SalesRevenueGoodsNet",
+    "SalesRevenueNet"
+  ],
+  "n_periods": 180,
+  "n_periods_multi_filing": 141,
+  "n_periods_conflicting_values": 19,
+  "tag_disagreements": [
+    {
+      "quarter": "2008Q2",
+      "Revenues": 15472000000.0,
+      "SalesRevenueNet": 14971000000.0
+    },
+    {
+      "quarter": "2008Q3",
+      "Revenues": 15114000000.0,
+      "SalesRevenueNet": 14588000000.0
+    },
+    {
+      "quarter": "2009Q1",
+      "Revenues": 14833000000.0,
+      "SalesRevenueNet": 14361000000.0
+    },
+    {
+      "quarter": "2009Q2",
+      "Revenues": 15067000000.0,
+      "SalesRevenueNet": 14567000000.0
+    },
+    {
+      "quarter": "2009Q3",
+      "Revenues": 15276000000.0,
+      "SalesRevenueNet": 14789000000.0
+    },
+    {
+      "quarter": "2010Q1",
+      "Revenues": 15593000000.0,
+      "SalesRevenueNet": 15158000000.0
+    },
+    {
+      "quarter": "2010Q2",
+      "Revenues": 15532000000.0,
+      "SalesRevenueNet": 15126000000.0
+    },
+    {
+      "quarter": "2010Q3",
+      "Revenues": 15605000000.0,
+      "SalesRevenueNet": 15226000000.0
+    },
+    {
+      "quarter": "2010Q4",
+      "Revenues": 20661000000.0,
+      "SalesRevenueNet": 20277000000.0
+    },
+    {
+      "quarter": "2011Q1",
+      "Revenues": 15935000000.0,
+      "SalesRevenueNet": 15580000000.0
+    },
+    {
+      "quarter": "2011Q2",
+      "Revenues": 16240000000.0,
+      "SalesRevenueNet": 15895000000.0
+    },
+    {
+      "quarter": "2011Q3",
+      "Revenues": 16402000000.0,
+      "SalesRevenueNet": 16054000000.0
+    },
+    {
+      "quarter": "2011Q4",
+      "Revenues": 21288000000.0,
+      "SalesRevenueNet": 20937000000.0
+    },
+    {
+      "quarter": "2012Q1",
+      "Revenues": 16867000000.0,
+      "SalesRevenueNet": 16537000000.0
+    },
+    {
+      "quarter": "2012Q2",
+      "Revenues": 16779000000.0,
+      "SalesRevenueNet": 16451000000.0
+    },
+    {
+      "quarter": "2012Q3",
+      "Revenues": 16929000000.0,
+      "SalesRevenueNet": 16601000000.0
+    },
+    {
+      "quarter": "2012Q4",
+      "Revenues": 22726000000.0,
+      "SalesRevenueNet": 22370000000.0
+    },
+    {
+      "quarter": "2017Q3",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 16874000000.0,
+      "SalesRevenueNet": 16667000000.0
+    },
+    {
+      "quarter": "2018Q1",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 16556000000.0,
+      "SalesRevenueGoodsNet": 16556000000.0,
+      "SalesRevenueNet": 16781000000.0
+    },
+    {
+      "quarter": "2018Q2",
+      "RevenueFromContractWithCustomerExcludingAssessedTax": 17552000000.0,
+      "SalesRevenueNet": 17776000000.0
+    }
+  ],
+  "calendar_collisions": [],
+  "tag_switches": [
+    {
+      "quarter": "2014Q1",
+      "from": "Revenues",
+      "to": "SalesRevenueNet",
+      "n_overlap": 23,
+      "median_diff_pct": -2.12
+    },
+    {
+      "quarter": "2018Q1",
+      "from": "SalesRevenueNet",
+      "to": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "n_overlap": 6,
+      "median_diff_pct": -0.13
+    }
+  ],
+  "fiscal_year_end": "Jan",
+  "first_quarter": "2009Q1",
+  "last_quarter": "2026Q2",
+  "n_quarters": 70,
+  "missing_quarters": [],
+  "contiguous_start": "2009Q1",
+  "n_contiguous": 70,
+  "n_derived": 7,
+  "n_restated": 9,
+  "n_material_restatements": 8,
+  "probable_misdated_facts": [],
+  "max_abs_restatement_pct": 0.026956914053688275,
+  "restatement_examples": [
+    {
+      "quarter": "2014Q3",
+      "first": 17732000000.0,
+      "latest": 17254000000.0,
+      "pct": -2.7
+    },
+    {
+      "quarter": "2014Q2",
+      "first": 17406000000.0,
+      "latest": 16957000000.0,
+      "pct": -2.58
+    },
+    {
+      "quarter": "2014Q1",
+      "first": 17050000000.0,
+      "latest": 16657000000.0,
+      "pct": -2.3
+    },
+    {
+      "quarter": "2018Q1",
+      "first": 16556000000.0,
+      "latest": 16781000000.0,
+      "pct": 1.36
+    },
+    {
+      "quarter": "2017Q1",
+      "first": 16017000000.0,
+      "latest": 16223000000.0,
+      "pct": 1.29
+    }
+  ],
+  "tag_by_quarter": {
+    "RevenueFromContractWithCustomerExcludingAssessedTax": "2018Q1..2026Q2 (34)",
+    "Revenues": "2009Q1..2013Q4 (20)",
+    "SalesRevenueNet": "2014Q1..2017Q4 (16)"
+  },
+  "non_positive_values": [],
+  "qoq_outliers": [],
+  "yoy_outliers": [],
+  "long_quarters_53wk": [
+    "2012Q4",
+    "2017Q4",
+    "2023Q4"
+  ],
+  "downloaded": "2026-10-21",
+  "latest_period_end": "2026-08-01",
+  "stale": false,
+  "verdict": "READY WITH CAVEATS",
+  "min_contiguous_needed": 40,
+  "drivers": {
+    "CostOfRevenue": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "CostOfGoodsAndServicesSold": {
+      "present": true,
+      "n_quarters": 60,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "InventoryNet": {
+      "present": true,
+      "n_quarters": 73,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "instant"
+    },
+    "AccountsReceivableNetCurrent": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "ContractWithCustomerLiabilityCurrent": {
+      "present": true,
+      "n_quarters": 2,
+      "first": "2018Q4",
+      "last": "2019Q4",
+      "kind": "instant"
+    },
+    "OperatingIncomeLoss": {
+      "present": true,
+      "n_quarters": 52,
+      "first": "2010Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    },
+    "PaymentsToAcquirePropertyPlantAndEquipment": {
+      "present": true,
+      "n_quarters": 18,
+      "first": "2009Q1",
+      "last": "2026Q1",
+      "kind": "quarterly"
+    },
+    "ResearchAndDevelopmentExpense": {
+      "present": false,
+      "n_quarters": 0,
+      "first": null,
+      "last": null,
+      "kind": null
+    },
+    "SellingGeneralAndAdministrativeExpense": {
+      "present": true,
+      "n_quarters": 65,
+      "first": "2008Q2",
+      "last": "2026Q2",
+      "kind": "quarterly"
+    }
+  }
+}

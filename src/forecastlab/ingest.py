@@ -47,6 +47,8 @@ def fetch_companyfacts(cik: int, refresh: bool = False) -> dict:
     if refresh or not path.exists():
         url = config.COMPANYFACTS_URL.format(cik=cik)
         resp = _get(url, headers={"User-Agent": config.SEC_USER_AGENT, "Accept-Encoding": "gzip, deflate"})
+        if "facts" not in resp.json():  # never cache an error or maintenance page
+            raise RuntimeError(f"Unexpected companyfacts payload for CIK {cik}")
         path.write_bytes(resp.content)
         _write_manifest(path, url)
         time.sleep(0.2)  # stay well under SEC's 10 req/s limit
@@ -60,6 +62,9 @@ def fetch_fred(series: str, refresh: bool = False) -> pd.DataFrame:
     if refresh or not path.exists():
         url = config.FRED_URL.format(series=series)
         resp = _get(url)
+        first_line = resp.text.splitlines()[0] if resp.text else ""
+        if "," not in first_line or "<" in first_line:  # FRED serves HTML maintenance pages with HTTP 200
+            raise RuntimeError(f"FRED returned non-CSV content for {series}: {first_line[:60]!r}")
         path.write_bytes(resp.content)
         _write_manifest(path, url)
     df = pd.read_csv(path)
@@ -76,5 +81,9 @@ def ingest_all(refresh: bool = False, with_macro: bool = True) -> None:
         print(f"[ingest] {c.ticker}: CIK {c.cik} -> {name}")
     if with_macro:
         for s in config.FRED_SERIES:
-            df = fetch_fred(s, refresh=refresh)
+            try:
+                df = fetch_fred(s, refresh=refresh)
+            except RuntimeError as exc:  # macro is optional: warn and continue without it
+                print(f"[ingest] WARNING: FRED {s} unavailable, macro features will be skipped ({exc})")
+                continue
             print(f"[ingest] FRED {s}: {len(df)} monthly obs, last {df['date'].max().date()}")
