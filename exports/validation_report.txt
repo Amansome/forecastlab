@@ -1,6 +1,6 @@
 Pandera schema validation: PASSED
-rows=200
+rows=240
 origin=2026Q1
-versions=['Actual', 'Fcst_ETS', 'Fcst_LightGBM', 'Fcst_SeasonalNaive']
+versions=['Actual', 'Fcst_ETS', 'Fcst_LightGBM', 'Fcst_LightGBM_Macro', 'Fcst_SeasonalNaive']
 entities=['AAPL', 'AMZN', 'GOOGL', 'HD', 'KO', 'MSFT', 'NKE', 'PG', 'TGT', 'WMT']
 periods=['Q2 FY24', 'Q3 FY24', 'Q4 FY24', 'Q1 FY25', 'Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26', 'Q2 FY26', 'Q3 FY26', 'Q4 FY26', 'Q1 FY27']

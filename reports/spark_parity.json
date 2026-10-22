@@ -7,6 +7,9 @@
     "base_vs_trailing4": 3.552713678800501e-15,
     "base_yoy": 3.552713678800501e-15,
     "level_vs_ma4": 3.552713678800501e-15,
+    "macro_cpi_yoy": 0.0,
+    "macro_retail_yoy": 0.0,
+    "macro_retail_yoy_chg": 0.0,
     "qoq_0": 3.552713678800501e-15,
     "tq_1": 0.0,
     "tq_2": 0.0,
@@ -24,8 +27,8 @@
     "target": 3.552713678800501e-15
   },
   "train_rows_with_future_label": 0,
-  "n_forecasts_compared": 480,
-  "n_forecasts_pandas": 480,
+  "n_forecasts_compared": 960,
+  "n_forecasts_pandas": 960,
   "max_rel_forecast_diff": 1.9984014443252818e-15,
-  "mean_rel_forecast_diff": 8.877158267731981e-16
+  "mean_rel_forecast_diff": 8.851715656750987e-16
 }
